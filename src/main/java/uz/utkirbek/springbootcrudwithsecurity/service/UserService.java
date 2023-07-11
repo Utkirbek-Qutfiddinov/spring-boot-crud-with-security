@@ -1,6 +1,7 @@
 package uz.utkirbek.springbootcrudwithsecurity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uz.utkirbek.springbootcrudwithsecurity.dto.ApiResponse;
@@ -25,6 +26,10 @@ public class UserService {
 
     public List<User> getAll(){
         return userRepository.findAll();
+    }
+
+    public List<User> getAll(int page, int size){
+        return userRepository.findAll(PageRequest.of(page, size)).getContent();
     }
 
     public User getOne(Integer id){

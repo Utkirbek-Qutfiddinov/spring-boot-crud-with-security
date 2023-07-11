@@ -27,8 +27,11 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<?> findAll(){
+    public ResponseEntity<?> findAll(@RequestParam(value = "page", required = false) Integer page,
+                                     @RequestParam(value = "size", required = false) Integer size){
+        if (page==null || size==null)
         return ResponseEntity.ok(userService.getAll());
+        else return ResponseEntity.ok(userService.getAll(page,size));
     }
 
     @GetMapping("/{id}")
